@@ -1,38 +1,51 @@
+body {
+  background: #fff;
+  font-family: "Delius", cursive;
+}
 .App {
   text-align: center;
+  background-color: rgba(223, 211, 211, 0.425);
+  width: 1200px;
+  min-height: auto;
+  margin: auto;
+  margin-top: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  margin-top: 0;
+  font-weight: bold;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.headerName {
+  font-size: 40px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.headerSonuc {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  background-color: rgba(22, 219, 137, 0.377);
+  margin-top: 5px;
+  height: 70px;
+  margin-bottom: 10px;
 }
-
-.App-link {
-  color: #61dafb;
+.toplamPuan {
+  font-size: 25px;
+  margin-left: 100px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button {
+  margin-right: 100px;
+  height: 50px;
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.button:hover {
+  background: #c23866;
+  color: #fff;
 }
