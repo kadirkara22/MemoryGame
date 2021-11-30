@@ -5,22 +5,26 @@ export const cardsSlice = createSlice({
     initialState: {
         items: [],
         cardImages: [
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/angular2.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/vue.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/react.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/grunt.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/phantomjs.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/ember.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/babel.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/ionic.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/gulp.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/meteor.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/yeoman.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/yarn.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/nodejs.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/bower.png" },
-            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/browserify.png" },
-        ]
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/angular2.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/vue.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/react.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/grunt.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/phantomjs.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/ember.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/babel.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/ionic.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/gulp.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/meteor.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/yeoman.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/yarn.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/nodejs.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/bower.png", matched: false },
+            { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/browserify.png", matched: false },
+        ],
+        turn: 0,
+        selectOne: null,
+        selectTwo: null,
+        disabled: false
     },
     reducers: {
         randomCards: (state, action) => {
@@ -29,9 +33,33 @@ export const cardsSlice = createSlice({
                 .sort(() => Math.random() - 0.5)
                 .map((card) => ({ ...card, id: Math.random() }))
             state.items = randomCards;
+            state.turn = 0;
+        },
+        selectedCard: (state, action) => {
+            const selectCard = action.payload;
+            state.items = state.items.find(item => item.src === selectCard.src)
+                ? state.items.map(card => card.src === selectCard.src ? { ...card, matched: true } : card)
+                : [...state.items]
+        },
+        selectOneCard: (state, action) => {
+            const card = action.payload;
+            state.selectOne = card
+        },
+        selectTwoCard: (state, action) => {
+            const card = action.payload;
+            state.selectTwo = card
+        },
+        resetTurn: (state, action) => {
+            state.selectOne = null;
+            state.selectTwo = null;
+            state.turn += 1;
+
+        },
+        changeDisable: (state, action) => {
+            const disabled = true
         }
     }
 });
 
-export const { randomCards } = cardsSlice.actions;
+export const { randomCards, selectOneCard, selectTwoCard, resetTurn, selectedCard, changeDisable } = cardsSlice.actions;
 export default cardsSlice.reducer;
