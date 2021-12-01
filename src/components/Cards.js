@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeDisable, randomCards, resetTurn, selectedCard, selectOneCard, selectTwoCard } from '../redux/cardsSlice';
+import { changeDisable, decreasePuan, increasePuan, randomCards, resetTurn, selectedCard, selectOneCard, selectTwoCard } from '../redux/cardsSlice';
 import SingleCard from './SingleCard';
 import "./Card.css"
 
@@ -32,9 +32,11 @@ const Cards = () => {
             if (selectOne.src === selectTwo.src) {
                 dispatch(selectedCard(selectOne))
                 dispatch(resetTurn())
+                dispatch(increasePuan())
             } else {
 
                 setTimeout(() => dispatch(resetTurn()), 1000)
+                dispatch(decreasePuan())
             }
         }
     }, [dispatch, selectOne, selectTwo])

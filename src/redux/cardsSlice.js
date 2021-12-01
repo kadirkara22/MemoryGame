@@ -22,9 +22,12 @@ export const cardsSlice = createSlice({
             { src: "https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/browserify.png", matched: false },
         ],
         turn: 0,
+        puan: 0,
+        count: 0,
         selectOne: null,
         selectTwo: null,
-        disabled: false
+        disabled: false,
+
     },
     reducers: {
         randomCards: (state, action) => {
@@ -33,13 +36,17 @@ export const cardsSlice = createSlice({
                 .sort(() => Math.random() - 0.5)
                 .map((card) => ({ ...card, id: Math.random() }))
             state.items = randomCards;
+            state.puan = 0;
             state.turn = 0;
+            state.count = 0;
         },
         selectedCard: (state, action) => {
             const selectCard = action.payload;
             state.items = state.items.find(item => item.src === selectCard.src)
                 ? state.items.map(card => card.src === selectCard.src ? { ...card, matched: true } : card)
                 : [...state.items]
+
+
         },
         selectOneCard: (state, action) => {
             const card = action.payload;
@@ -52,14 +59,27 @@ export const cardsSlice = createSlice({
         resetTurn: (state, action) => {
             state.selectOne = null;
             state.selectTwo = null;
-            state.turn += 1;
 
         },
         changeDisable: (state, action) => {
             const disabled = true
+        },
+        increasePuan: (state, action) => {
+            const newPuan = state.puan + 50
+            state.puan = newPuan
+            state.turn = state.turn + 1
+            state.count = state.count + 2
+
+        },
+        decreasePuan: (state, action) => {
+            const newPuan = state.puan - 10
+            state.puan = newPuan
+            state.turn = state.turn + 1
+
+
         }
     }
 });
 
-export const { randomCards, selectOneCard, selectTwoCard, resetTurn, selectedCard, changeDisable } = cardsSlice.actions;
+export const { randomCards, selectOneCard, selectTwoCard, resetTurn, selectedCard, changeDisable, increasePuan, decreasePuan } = cardsSlice.actions;
 export default cardsSlice.reducer;

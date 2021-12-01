@@ -1,72 +1,60 @@
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 1000px;
-  margin: auto;
+  margin: 10px 10px 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
 }
-
 .card {
-  margin-left: 10px;
-  margin-bottom: 10px;
-  width: 150px;
-  font-size: 50px;
-  height: 200px;
-  cursor: pointer;
-  color: darken(#e2cfca, 20%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to top, #c29a9a, #f7e2cd);
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
   position: relative;
 }
-
 .card img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  background-color: white;
+  border: 1px solid white;
+}
+.card .back {
+  width: 100%;
+  height: 170px;
+  display: block;
+  background-color: rgba(245, 119, 119, 0.253);
+  border-radius: 6px;
+  color: white;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: white;
+  font-size: 120px;
+  border: 1px solid white;
+  cursor: pointer;
 }
+
 .card .front {
   transform: rotateY(90deg);
   transition: all ease-in 0.2s;
   position: absolute;
-  -webkit-transform: rotateY(90deg);
-  -moz-transform: rotateY(90deg);
-  -ms-transform: rotateY(90deg);
-  -o-transform: rotateY(90deg);
-  -webkit-transition: all ease-in 0.2s;
-  -moz-transition: all ease-in 0.2s;
-  -ms-transition: all ease-in 0.2s;
-  -o-transition: all ease-in 0.2s;
 }
 .flipped .front {
   transform: rotateY(0deg);
   transition-delay: 0.2s;
-  -webkit-transform: rotateY(0deg);
-  -moz-transform: rotateY(0deg);
-  -ms-transform: rotateY(0deg);
-  -o-transform: rotateY(0deg);
-  margin-left: -61px;
-  margin-top: -65px;
-  width: 150px;
-  font-size: 50px;
-  height: 200px;
-  cursor: pointer;
+}
+
+/* back of card - cover */
+.card .back {
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
+}
+.flipped .back {
+  transform: rotateY(90deg);
+  transition-delay: 0s;
+}
+
+.sonuc {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+}
+.tur {
+  margin-left: 60px;
+  font-size: 25px;
 }
